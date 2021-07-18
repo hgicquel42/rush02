@@ -19,6 +19,7 @@ char	*ft_strjoin(char *a, char *b)
 	j = 0;
 	while (b[j])
 		c[i++] = b[j++];
+	c[i] = '\0';
 	return (c);
 }
 
@@ -33,7 +34,7 @@ char	*ft_strdup(char	*str)
 	if (!res)
 		return (0);
 	i = 0;
-	while (i < s)
+	while (str[i])
 	{
 		res[i] = str[i];
 		i++;

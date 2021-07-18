@@ -1,10 +1,9 @@
 #include "ft.h"
 
-
-t_keyvalue	*ft_create_list()
+t_keyvalue	*ft_create_list(void)
 {
 	t_keyvalue	*kv;
-	
+
 	kv = malloc(sizeof(t_keyvalue));
 	if (!kv)
 		return (0);

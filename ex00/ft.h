@@ -31,13 +31,21 @@ int			ft_is_number(char c);
 
 int			ft_is_printable(char c);
 
-int			ft_is_tens(char	*s, int m);
+/* ft_parse.c */
 
 int			ft_parse(t_keyvalue **dict, int file);
 
+/* ft_convert.c */
+
 int			ft_convert(t_keyvalue *dict, char *arg);
 
-t_keyvalue	*ft_create_list();
+/* ft_free.c */
+
+void		ft_free(t_keyvalue *dict);
+
+/* ft_list.c */
+
+t_keyvalue	*ft_create_list(void);
 
 void		ft_list_append(t_keyvalue	**start, t_keyvalue	*end);
 

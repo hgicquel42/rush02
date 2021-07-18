@@ -1,5 +1,16 @@
 #include "ft.h"
 
+int	ft_is_tens(char	*s, char m)
+{
+	if (*(s++) != m)
+		return (0);
+	while (*s && *s == '0')
+		s++;
+	if (*s == '\0')
+		return (1);
+	return (0);
+}
+
 int	ft_convert_exact(t_keyvalue *dict, char *arg, int size)
 {
 	t_keyvalue	*kv;

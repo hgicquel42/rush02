@@ -6,7 +6,8 @@ FILES = \
 	ft_list.c \
 	ft_out.c \
 	ft_utils.c \
-	ft_convert.c
+	ft_convert.c \
+	ft_free.c
 
 all: ${NAME}
 

@@ -1,12 +1,12 @@
 #include "ft.h"
 
-int	ft_error()
+int	ft_error(void)
 {
 	ft_puterr("Error\n");
 	return (1);
 }
 
-int	ft_dict_error()
+int	ft_dict_error(void)
 {
 	ft_puterr("Dict Error\n");
 	return (1);
@@ -24,7 +24,9 @@ int	ft_open(t_keyvalue **dict, char *path)
 
 void	_print_dict(t_keyvalue *dict)
 {
-	t_keyvalue	*kv = dict;
+	t_keyvalue	*kv;
+
+	kv = dict;
 	while (kv)
 	{
 		printf("%s\n", kv->key);
@@ -48,5 +50,6 @@ int	main(int argc, char **argv)
 	if (!ft_open(&dict, path))
 		return (ft_dict_error());
 	ft_convert(dict, argv[index]);
+	ft_free(dict);
 	return (0);
 }

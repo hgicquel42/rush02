@@ -1,115 +1,126 @@
 #include "ft.h"
 
-int	ft_is_tens(char	*s, char m)
+char	*ft_convert0(t_keyvalue *dict, char *arg)
 {
-	if (*(s++) != m)
-		return (0);
-	while (*s && *s == '0')
-		s++;
-	if (*s == '\0')
-		return (1);
-	return (0);
+	char	*a;
+	char	*b;
+	char	*c;
+
+	a = 0;
+	b = 0;
+	c = ft_convert_exact(dict, arg);
+	if (c)
+		return (c);
+	if (arg[0] != '0')
+		a = ft_convert_tens(dict, arg);
+	if (arg[1] != '0')
+		b = ft_convert_digit(dict, arg[1]);
+	return (ft_join(a, b));
 }
 
-int	ft_convert_exact(t_keyvalue *dict, char c)
+char	*ft_convert1(t_keyvalue *dict, char *arg, int size)
 {
-	t_keyvalue	*kv;
+	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
 
-	kv = dict;
-	while (kv)
+	a = 0;
+	b = 0;
+	c = 0;
+	d = 0;
+	if (arg[0] != '0')
 	{
-		if (kv->key[0] == c)
-		{
-			ft_putout(kv->value);
-			return (1);
-		}
-		kv = kv->next;
+		a = ft_convert_rec(dict, arg, 1);
+		b = ft_convert_hundred(dict, size);
+		c = ft_join(a, b);
 	}
-	return (0);
+	d = ft_convert_rec(dict, &arg[1], size - 1);
+	return (ft_join(c, d));
 }
 
-int	ft_convert_tens(t_keyvalue *dict, char *arg)
+char	*ft_convert2(t_keyvalue *dict, char *arg, int size)
 {
-	t_keyvalue	*kv;
+	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
 
-	kv = dict;
-	while (kv)
+	a = 0;
+	b = 0;
+	c = 0;
+	d = 0;
+	if (arg[0] != '0')
 	{
-		if (kv->size == 2 && ft_is_tens(kv->key, arg[0]))
-		{
-			ft_putout(kv->value);
-			return (1);
-		}
-		kv = kv->next;
+		a = ft_convert_rec(dict, arg, 2);
+		b = ft_convert_hundred(dict, size - 1);
+		c = ft_join(a, b);
 	}
-	return (0);
+	d = ft_convert_rec(dict, &arg[2], size - 2);
+	return (ft_join(c, d));
 }
 
-int	ft_convert_hundred(t_keyvalue *dict, int size)
+char	*ft_convert3(t_keyvalue *dict, char *arg, int size)
 {
-	t_keyvalue	*kv;
+	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
 
-	kv = dict;
-	while (kv)
+	a = 0;
+	b = 0;
+	c = 0;
+	d = 0;
+	if (arg[0] != '0')
 	{
-		if (kv->size == size && ft_is_tens(kv->key, '1'))
-		{
-			ft_putout(kv->value);
-			return (1);
-		}
-		kv = kv->next;
+		a = ft_convert_rec(dict, arg, 3);
+		b = ft_convert_hundred(dict, size - 2);
+		c = ft_join(a, b);
 	}
-	return (0);
+	d = ft_convert_rec(dict, &arg[3], size - 3);
+	return (ft_join(c, d));
 }
 
-int	ft_convert2(t_keyvalue *dict, char *arg, int size)
+char	*ft_convert_rec(t_keyvalue *dict, char *arg, int size)
 {
+	char	*a;
+	char	*b;
+	char	*c;
+	char	*d;
+
+	a = 0;
+	b = 0;
+	c = 0;
+	d = 0;
 	if (!size)
 		return (0);
 	if (size == 1)
-		return (ft_convert_exact(dict, arg[0]));
+		return (ft_convert_digit(dict, arg[0]));
 	if (size == 2)
-	{
-		if (arg[0] != '0')
-		{
-			if (!ft_convert_tens(dict, arg))
-				return (0);
-			ft_putout(" ");
-		}
-		if (arg[1] != '0')
-		{
-			if (!ft_convert_exact(dict, arg[1]))
-				return (0);
-		}
-		return (1);
-	}
-	if (size >= 3)
-	{
-		if (arg[0] != '0')
-		{
-			if (!ft_convert_exact(dict, arg[0]))
-				return (0);
-			ft_putout(" ");
-			if (!ft_convert_hundred(dict, size))
-				return (0);
-			ft_putout(" ");
-		}
-		return (ft_convert2(dict, &arg[1], size - 1));
-	}
+		return (ft_convert0(dict, arg));
+	if (size == 3 || size % 3 == 1)
+		return (ft_convert1(dict, arg, size));
+	if (size % 3 == 2)
+		return (ft_convert2(dict, arg, size));
+	if (size % 3 == 0)
+		return (ft_convert3(dict, arg, size));
 	return (0);
 }
 
 int	ft_convert(t_keyvalue *dict, char *arg)
 {
-	int	size;
+	int		size;
+	char	*result;
 
 	size = 0;
 	while (ft_is_number(arg[size]))
 		size++;
 	if (arg[size] != '\0')
 		return (0);
-	if (!ft_convert2(dict, arg, size))
+	result = ft_convert_rec(dict, arg, size);
+	if (!result)
 		return (0);
+	ft_putout(result);
 	ft_putout("\n");
 	return (1);
 }

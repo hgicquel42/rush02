@@ -49,7 +49,8 @@ int	main(int argc, char **argv)
 		path = argv[index++];
 	if (!ft_open(&dict, path))
 		return (ft_dict_error());
-	ft_convert(dict, argv[index]);
+	if (!ft_convert(dict, argv[index]))
+		return (ft_error());
 	ft_free(dict);
 	return (0);
 }

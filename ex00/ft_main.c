@@ -31,10 +31,13 @@ int	main(int argc, char **argv)
 	t_keyvalue	*dict;
 
 	index = 1;
-	if (argc == 2)
+	dict = 0;
+	if (argc == 3)
+		path = argv[index++];
+	else if (argc == 2)
 		path = "numbers.dict";
 	else
-		path = argv[index++];
+		return (ft_error(dict));
 	if (!ft_open(&dict, path))
 		return (ft_dict_error(dict));
 	if (!ft_convert(dict, argv[index]))

@@ -55,15 +55,16 @@ t_keyvalue	*ft_create_list(void);
 
 void		ft_list_append(t_keyvalue	**start, t_keyvalue	*end);
 
+/* ft_convert.c ft_convert2.c */
 
-char	*ft_convert_exact(t_keyvalue *dict, char *s);
+char		*ft_convert_exact(t_keyvalue *dict, char *s);
 
-char	*ft_convert_digit(t_keyvalue *dict, char c);
+char		*ft_convert_digit(t_keyvalue *dict, char c);
 
-char	*ft_convert_tens(t_keyvalue *dict, char *arg);
+char		*ft_convert_tens(t_keyvalue *dict, char *arg);
 
-char	*ft_convert_hundred(t_keyvalue *dict, int size);
+char		*ft_convert_hundred(t_keyvalue *dict, int size);
 
-char	*ft_convert_rec(t_keyvalue *dict, char *arg, int size);
+char		*ft_convert_rec(t_keyvalue *dict, char *arg, int size);
 
 #endif

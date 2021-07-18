@@ -18,7 +18,7 @@ char	*ft_convert0(t_keyvalue *dict, char *arg)
 	return (ft_join(a, b));
 }
 
-char	*ft_convert1(t_keyvalue *dict, char *arg, int size)
+char	*ft_convert1(t_keyvalue *dict, char *arg, int size, int offset)
 {
 	char	*a;
 	char	*b;
@@ -31,53 +31,11 @@ char	*ft_convert1(t_keyvalue *dict, char *arg, int size)
 	d = 0;
 	if (arg[0] != '0')
 	{
-		a = ft_convert_rec(dict, arg, 1);
-		b = ft_convert_hundred(dict, size);
+		a = ft_convert_rec(dict, arg, offset);
+		b = ft_convert_hundred(dict, size - (offset - 1));
 		c = ft_join(a, b);
 	}
-	d = ft_convert_rec(dict, &arg[1], size - 1);
-	return (ft_join(c, d));
-}
-
-char	*ft_convert2(t_keyvalue *dict, char *arg, int size)
-{
-	char	*a;
-	char	*b;
-	char	*c;
-	char	*d;
-
-	a = 0;
-	b = 0;
-	c = 0;
-	d = 0;
-	if (arg[0] != '0')
-	{
-		a = ft_convert_rec(dict, arg, 2);
-		b = ft_convert_hundred(dict, size - 1);
-		c = ft_join(a, b);
-	}
-	d = ft_convert_rec(dict, &arg[2], size - 2);
-	return (ft_join(c, d));
-}
-
-char	*ft_convert3(t_keyvalue *dict, char *arg, int size)
-{
-	char	*a;
-	char	*b;
-	char	*c;
-	char	*d;
-
-	a = 0;
-	b = 0;
-	c = 0;
-	d = 0;
-	if (arg[0] != '0')
-	{
-		a = ft_convert_rec(dict, arg, 3);
-		b = ft_convert_hundred(dict, size - 2);
-		c = ft_join(a, b);
-	}
-	d = ft_convert_rec(dict, &arg[3], size - 3);
+	d = ft_convert_rec(dict, &arg[offset], size - offset);
 	return (ft_join(c, d));
 }
 
@@ -99,11 +57,11 @@ char	*ft_convert_rec(t_keyvalue *dict, char *arg, int size)
 	if (size == 2)
 		return (ft_convert0(dict, arg));
 	if (size == 3 || size % 3 == 1)
-		return (ft_convert1(dict, arg, size));
+		return (ft_convert1(dict, arg, size, 1));
 	if (size % 3 == 2)
-		return (ft_convert2(dict, arg, size));
+		return (ft_convert1(dict, arg, size, 2));
 	if (size % 3 == 0)
-		return (ft_convert3(dict, arg, size));
+		return (ft_convert1(dict, arg, size, 3));
 	return (0);
 }
 

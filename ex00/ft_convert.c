@@ -8,7 +8,9 @@ char	*ft_convert0(t_keyvalue *dict, char *arg)
 
 	a = 0;
 	b = 0;
-	c = ft_convert_exact(dict, arg);
+	c = 0;
+	if (arg[0] == '1')
+		c = ft_convert_exact(dict, arg);
 	if (c)
 		return (c);
 	if (arg[0] != '0')
@@ -33,6 +35,8 @@ char	*ft_convert1(t_keyvalue *dict, char *arg, int size, int offset)
 	{
 		a = ft_convert_rec(dict, arg, offset);
 		b = ft_convert_hundred(dict, size - (offset - 1));
+		if (!b)
+			return (0);
 		c = ft_join(a, b);
 	}
 	d = ft_convert_rec(dict, &arg[offset], size - offset);

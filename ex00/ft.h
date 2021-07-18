@@ -61,6 +61,8 @@ char		*ft_convert_exact(t_keyvalue *dict, char *s);
 
 char		*ft_convert_digit(t_keyvalue *dict, char c);
 
+char		*ft_convert_two(t_keyvalue *dict, char *s);
+
 char		*ft_convert_tens(t_keyvalue *dict, char *arg);
 
 char		*ft_convert_hundred(t_keyvalue *dict, int size);

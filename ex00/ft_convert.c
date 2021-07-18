@@ -9,10 +9,8 @@ char	*ft_convert0(t_keyvalue *dict, char *arg)
 	a = 0;
 	b = 0;
 	c = 0;
-	if (arg[0] == '1')
-		c = ft_convert_exact(dict, arg);
-	if (c)
-		return (c);
+	if (arg[0] == '1' && arg[1])
+		return (ft_convert_two(dict, arg));
 	if (arg[0] != '0')
 		a = ft_convert_tens(dict, arg);
 	if (arg[1] != '0')
@@ -31,7 +29,6 @@ char	*ft_convert1(t_keyvalue *dict, char *arg, int size, int offset)
 	a = 0;
 	b = 0;
 	c = 0;
-	d = 0;
 	if (arg[0] != '0')
 	{
 		a = ft_convert_rec(dict, arg, offset);
@@ -42,7 +39,8 @@ char	*ft_convert1(t_keyvalue *dict, char *arg, int size, int offset)
 	}
 	d = ft_convert_rec(dict, &arg[offset], size - offset);
 	e = ft_join(c, d);
-	free(c);
+	if (c)
+		free(c);
 	return (e);
 }
 

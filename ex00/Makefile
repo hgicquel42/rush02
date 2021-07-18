@@ -9,7 +9,8 @@ FILES = \
 	ft_convert.c \
 	ft_convert2.c \
 	ft_free.c \
-	ft_check.c
+	ft_check.c \
+	ft_join.c
 
 all: ${NAME}
 

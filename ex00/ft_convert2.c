@@ -1,5 +1,19 @@
 #include "ft.h"
 
+char	*ft_convert_exact(t_keyvalue *dict, char *s)
+{
+	t_keyvalue	*kv;
+
+	kv = dict;
+	while (kv)
+	{
+		if (!ft_strcmp(kv->key, s))
+			return (kv->value);
+		kv = kv->next;
+	}
+	return (0);
+}
+
 char	*ft_convert_digit(t_keyvalue *dict, char c)
 {
 	t_keyvalue	*kv;
@@ -14,7 +28,7 @@ char	*ft_convert_digit(t_keyvalue *dict, char c)
 	return (0);
 }
 
-char	*ft_convert_exact(t_keyvalue *dict, char *s)
+char	*ft_convert_two(t_keyvalue *dict, char *s)
 {
 	t_keyvalue	*kv;
 

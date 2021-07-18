@@ -28,6 +28,7 @@ void	_print_dict(t_keyvalue *dict)
 	while (kv)
 	{
 		printf("%s\n", kv->key);
+		printf("%d\n", kv->size);
 		printf("%s\n", kv->value);
 		kv = kv->next;
 	}
@@ -35,11 +36,17 @@ void	_print_dict(t_keyvalue *dict)
 
 int	main(int argc, char **argv)
 {
+	int			index;
+	char		*path;
 	t_keyvalue	*dict;
 
-	if (argc != 2)
-		return (1);
-	if (!ft_open(&dict, argv[1]))
+	index = 1;
+	if (argc == 2)
+		path = "numbers.dict";
+	else
+		path = argv[index++];
+	if (!ft_open(&dict, path))
 		return (ft_dict_error());
-	printf("it works\n");
+	ft_convert(dict, argv[index]);
+	return (0);
 }

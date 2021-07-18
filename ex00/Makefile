@@ -4,7 +4,9 @@ FILES = \
 	ft_main.c \
 	ft_parse.c \
 	ft_list.c \
-	ft_out.c
+	ft_out.c \
+	ft_utils.c \
+	ft_convert.c
 
 all: ${NAME}
 

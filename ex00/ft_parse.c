@@ -13,6 +13,8 @@ char	*ft_split_first(char *input, int *offset, int size)
 	while (i < size && ft_is_number(input[i]))
 		i++, o++;
 	output = malloc((o + 1) * sizeof(char));
+	if (!output)
+		return (0);
 	i = *offset;
 	o = 0;
 	while (i < size && ft_is_number(input[i]))
@@ -33,6 +35,8 @@ char	*ft_split_last(char *input, int *offset, int size)
 	while (i < size && ft_is_printable(input[i]))
 		i++, o++;
 	output = malloc((o + 1) * sizeof(char));
+	if (!output)
+		return (0);
 	i = *offset;
 	o = 0;
 	while (i < size && ft_is_printable(input[i]))
@@ -52,6 +56,7 @@ t_keyvalue	*ft_split(char	*buffer, int size)
 		return (0);
 	i = 0;
 	kv->key = ft_split_first(buffer, &i, size);
+	kv->size = ft_strlen(kv->key);
 	if (!kv->key)
 		return (0);
 	while (i < size && buffer[i] == ' ')

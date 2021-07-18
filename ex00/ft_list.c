@@ -31,5 +31,3 @@ void	ft_list_append(t_keyvalue	**start, t_keyvalue	*end)
 	else
 		ft_list_end(*start)->next = end;
 }
-
-void	ft_list_find_key(t_keyvalue *start, void *data_ref, )

@@ -26,6 +26,7 @@ char	*ft_convert1(t_keyvalue *dict, char *arg, int size, int offset)
 	char	*b;
 	char	*c;
 	char	*d;
+	char	*e;
 
 	a = 0;
 	b = 0;
@@ -40,7 +41,9 @@ char	*ft_convert1(t_keyvalue *dict, char *arg, int size, int offset)
 		c = ft_join(a, b);
 	}
 	d = ft_convert_rec(dict, &arg[offset], size - offset);
-	return (ft_join(c, d));
+	e = ft_join(c, d);
+	free(c);
+	return (e);
 }
 
 char	*ft_convert_rec(t_keyvalue *dict, char *arg, int size)
